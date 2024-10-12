@@ -20,6 +20,7 @@ const IMAGE_HEIGHT = IMAGE_WIDTH * 0.75;
 
 const NewsPost = props => {
   const navigation = useNavigation();
+
   const [showFullNewsBody, setShowFullNewsBody] = useState(false);
   const images = [
     props.Image1,
@@ -43,6 +44,12 @@ const NewsPost = props => {
       }}
     />
   );
+  const handleDonatePress = () => {
+    navigation.navigate('DonationPage', {
+      donationType: 'Charity',
+      Char_Event_name: props.AccountName,
+    });
+  };
 
   return (
     <View style={style.NewsContainer}>
@@ -78,10 +85,7 @@ const NewsPost = props => {
 
         <View style={style.IconsContainer}>
           <View style={style.icons}>
-            <Pressable
-              onPress={() => {
-                navigation.navigate('DonationPage');
-              }}>
+            <Pressable onPress={handleDonatePress}>
               <FontAwesomeIcon
                 icon={faDonate}
                 size={scaleFontsSize(22)}

@@ -13,11 +13,19 @@ import {
 import {faBell} from '@fortawesome/free-regular-svg-icons';
 import {faBell as faBellSolid} from '@fortawesome/free-solid-svg-icons';
 import UserProfileImage from '../UserProfileImage/UserProfileImage';
+import {useNavigation} from '@react-navigation/native';
 
 const EventsPosts = props => {
+  const navigation = useNavigation();
   const [isNotificationOn, setIsNotificationOn] = useState(false);
   const toggleNotification = () => {
     setIsNotificationOn(!isNotificationOn);
+  };
+  const handleDonatePress = () => {
+    navigation.navigate('DonationPage', {
+      donationType: 'Event',
+      Char_Event_name: props.EventName,
+    });
   };
   return (
     <View style={style.Container}>
@@ -92,7 +100,9 @@ const EventsPosts = props => {
             <Text style={style.ReadMoreTxt}>Read More</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={style.DonateButton}>
+          <TouchableOpacity
+            onPress={handleDonatePress}
+            style={style.DonateButton}>
             <Text style={style.DonateTxtx}>Donate</Text>
           </TouchableOpacity>
         </View>

@@ -37,16 +37,18 @@ const SearchandCat = ({navigation}) => {
           onPress={() => navigation.navigate(Routes.SelectionScreen)}>
           <FontAwesomeIcon
             icon={faPlus}
-            color={'#022150'}
+            color={'#000'}
             size={scaleFontsSize(23)}
           />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate(Routes.Search)}
           style={style.TouchableSearchinput}>
-          <TouchableOpacity style={style.TouchableSearchIcon}>
-            <FontAwesomeIcon icon={faSearch} size={scaleFontsSize(16)} />
-          </TouchableOpacity>
+          <FontAwesomeIcon
+            icon={faSearch}
+            color={'#565656'}
+            size={scaleFontsSize(16)}
+          />
           <Text style={style.TouchableSearchTxt}>Search</Text>
         </TouchableOpacity>
       </View>

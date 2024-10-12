@@ -14,7 +14,7 @@ const style = StyleSheet.create({
   TouchableSearchinput: {
     flexDirection: 'row',
     width: horizontalScale(305),
-    backgroundColor: '#DFDDDD',
+    backgroundColor: '#EFEFEF',
     height: verticalScale(30),
     borderRadius: horizontalScale(15),
     justifyContent: 'flex-start',
@@ -25,6 +25,7 @@ const style = StyleSheet.create({
     fontSize: scaleFontsSize(17),
     fontFamily: getFontFamily('Inter', '500'),
     marginLeft: horizontalScale(5),
+    color: '#565656',
   },
   inputContainer: {
     flexDirection: 'row',

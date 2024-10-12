@@ -1,35 +1,36 @@
-// DonationPage.js
 import React, {useState} from 'react';
 import {
   ScrollView,
   View,
   Text,
   TextInput,
-  Switch,
   TouchableOpacity,
   SafeAreaView,
+  Pressable,
 } from 'react-native';
-import styles from './styles';
-import {
-  horizontalScale,
-  scaleFontsSize,
-  verticalScale,
-} from '../../Styles/Scaling';
-
-import Buttons from '../../../Components/Buttons/Buttons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faCircleXmark} from '@fortawesome/free-regular-svg-icons';
 import {useNavigation} from '@react-navigation/native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faCircleXmark,
+  faDollarSign,
+  faUser,
+  faEnvelope,
+  faCreditCard,
+  faCalendarAlt,
+  faLock,
+} from '@fortawesome/free-solid-svg-icons';
+import {scaleFontsSize} from '../../Styles/Scaling';
+import {useRoute} from '@react-navigation/native';
+import styles from './styles';
 
 const DonationPage = () => {
   const navigation = useNavigation();
-
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [isRecurring, setIsRecurring] = useState(false);
   const [amount, setAmount] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [CardHolderName, setCardHolderName] = useState('');
+  const [cardHolderName, setCardHolderName] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
@@ -43,117 +44,198 @@ const DonationPage = () => {
     '6 Months',
     'Yearly',
   ];
-  const getSwitchContainerStyle = isToggled => ({
-    ...styles.switchContainer,
-    marginBottom: isToggled ? verticalScale(5) : verticalScale(30),
-  });
+  const route = useRoute();
+  const {donationType, Char_Event_name} = route.params || {};
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={{padding: horizontalScale(20)}}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={'false'}>
         <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}>
+          onPress={() => navigation.goBack()}
+          style={styles.closeButton}>
           <FontAwesomeIcon
             icon={faCircleXmark}
-            size={scaleFontsSize(30)}
-            color={'#022150'}
+            size={scaleFontsSize(20)}
+            color="#000"
           />
         </TouchableOpacity>
-        <Text style={styles.header}>Donate Now</Text>
+        {Char_Event_name && (
+          <Text style={styles.recipientText}>
+            Donating to:{'\n'}
+            {donationType === 'Event' ? 'Event' : 'Charity'} - {Char_Event_name}
+          </Text>
+        )}
 
-        <TextInput
-          style={styles.input}
-          placeholder="Donation Amount"
-          keyboardType="numeric"
-          value={amount}
-          onChangeText={setAmount}
-        />
+        <View style={styles.inputContainer}>
+          <FontAwesomeIcon
+            icon={faDollarSign}
+            size={scaleFontsSize(20)}
+            color="#6B7280"
+            style={styles.inputIcon}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Donation Amount"
+            placeholderTextColor="#9CA3AF"
+            keyboardType="numeric"
+            value={amount}
+            onChangeText={setAmount}
+          />
+        </View>
 
-        <View
-          style={[styles.switchContainer, {marginBottom: verticalScale(10)}]}>
-          <Text style={styles.txt}>Anonymous Donation</Text>
-          <Switch value={isAnonymous} onValueChange={setIsAnonymous} />
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchText}>Anonymous Donation</Text>
+          <Pressable
+            onPress={() => setIsAnonymous(!isAnonymous)}
+            style={[styles.switch, isAnonymous && styles.switchOn]}>
+            <View
+              style={[styles.switchThumb, isAnonymous && styles.switchThumbOn]}
+            />
+          </Pressable>
         </View>
 
         {!isAnonymous && (
           <>
-            <TextInput
-              style={styles.input}
-              placeholder="Name"
-              value={name}
-              onChangeText={setName}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              keyboardType="email-address"
-              value={email}
-              onChangeText={setEmail}
-            />
+            <View style={styles.inputContainer}>
+              <FontAwesomeIcon
+                icon={faUser}
+                size={scaleFontsSize(20)}
+                color="#6B7280"
+                style={styles.inputIcon}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Name"
+                placeholderTextColor="#9CA3AF"
+                value={name}
+                onChangeText={setName}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <FontAwesomeIcon
+                icon={faEnvelope}
+                size={scaleFontsSize(20)}
+                color="#6B7280"
+                style={styles.inputIcon}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                placeholderTextColor="#9CA3AF"
+                keyboardType="email-address"
+                value={email}
+                onChangeText={setEmail}
+              />
+            </View>
           </>
         )}
 
-        <TextInput
-          style={styles.input}
-          placeholder="Card Holder Name"
-          value={CardHolderName}
-          onChangeText={setCardHolderName}
-        />
+        <View style={styles.inputContainer}>
+          <FontAwesomeIcon
+            icon={faUser}
+            size={scaleFontsSize(20)}
+            color="#6B7280"
+            style={styles.inputIcon}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Card Holder Name"
+            placeholderTextColor="#9CA3AF"
+            value={cardHolderName}
+            onChangeText={setCardHolderName}
+          />
+        </View>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Card Number"
-          keyboardType="numeric"
-          value={cardNumber}
-          onChangeText={setCardNumber}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Expiry Date"
-          value={expiryDate}
-          onChangeText={setExpiryDate}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="CVV"
-          keyboardType="numeric"
-          value={cvv}
-          onChangeText={setCvv}
-        />
+        <View style={styles.inputContainer}>
+          <FontAwesomeIcon
+            icon={faCreditCard}
+            size={scaleFontsSize(20)}
+            color="#6B7280"
+            style={styles.inputIcon}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Card Number"
+            placeholderTextColor="#9CA3AF"
+            keyboardType="numeric"
+            value={cardNumber}
+            onChangeText={setCardNumber}
+          />
+        </View>
 
-        <View style={getSwitchContainerStyle(isRecurring)}>
-          <Text style={styles.txt}>Recurring Donation</Text>
-          <Switch value={isRecurring} onValueChange={setIsRecurring} />
+        <View style={styles.row}>
+          <View style={[styles.inputContainer, styles.halfWidth]}>
+            <FontAwesomeIcon
+              icon={faCalendarAlt}
+              size={scaleFontsSize(20)}
+              color="#6B7280"
+              style={styles.inputIcon}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="MM/YY"
+              placeholderTextColor="#9CA3AF"
+              value={expiryDate}
+              onChangeText={setExpiryDate}
+            />
+          </View>
+          <View style={[styles.inputContainer, styles.halfWidth]}>
+            <FontAwesomeIcon
+              icon={faLock}
+              size={scaleFontsSize(20)}
+              color="#6B7280"
+              style={styles.inputIcon}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="CVV"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="numeric"
+              value={cvv}
+              onChangeText={setCvv}
+            />
+          </View>
+        </View>
+
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchText}>Recurring Donation</Text>
+          <Pressable
+            onPress={() => setIsRecurring(!isRecurring)}
+            style={[styles.switch, isRecurring && styles.switchOn]}>
+            <View
+              style={[styles.switchThumb, isRecurring && styles.switchThumbOn]}
+            />
+          </Pressable>
         </View>
 
         {isRecurring && (
-          <View style={{marginBottom: verticalScale(20)}}>
+          <View style={styles.recurringOptionsContainer}>
             {recurringOptions.map(option => (
               <TouchableOpacity
                 key={option}
                 onPress={() => setRecurringOption(option)}
-                style={styles.optionButton}>
+                style={[
+                  styles.recurringOption,
+                  recurringOption === option && styles.selectedRecurringOption,
+                ]}>
                 <Text
-                  style={
-                    recurringOption === option
-                      ? styles.selectedOption
-                      : styles.option
-                  }>
+                  style={[
+                    styles.recurringOptionText,
+                    recurringOption === option &&
+                      styles.selectedRecurringOptionText,
+                  ]}>
                   {option}
                 </Text>
               </TouchableOpacity>
             ))}
           </View>
         )}
-        <View style={{marginBottom: verticalScale(60), alignItems: 'center'}}>
-          <Buttons
-            ButtonTxt={'Donate'}
-            ButtonWidth={horizontalScale(200)}
-            ButtonHeight={verticalScale(40)}
-          />
-        </View>
+
+        <TouchableOpacity style={styles.donateButton}>
+          <Text style={styles.donateButtonText}>Donate</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

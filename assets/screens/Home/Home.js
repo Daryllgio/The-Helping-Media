@@ -147,6 +147,7 @@ const Home = ({navigation}) => {
       postContent: 'This is the content of the post.',
     },
   ];
+
   const UserStoriesPageSize = 4;
   const [userStoriesFetchedCounter, setuserStoriesFetchedCounter] = useState(1);
   const [userStoriesrenderedData, setuserStoriesrenderedData] = useState([]);
@@ -187,7 +188,7 @@ const Home = ({navigation}) => {
           ListHeaderComponent={
             <>
               <View style={style.hearder}>
-                <Text style={style.DonateTxt}>Donate Now</Text>
+                <Text style={style.HeaderTxt}>Donate Now</Text>
                 <View style={style.IconContainer}>
                   <TouchableOpacity
                     onPress={() => {
@@ -197,7 +198,7 @@ const Home = ({navigation}) => {
                     <FontAwesomeIcon
                       icon={faMagnifyingGlass}
                       size={scaleFontsSize(22)}
-                      color={'#022150'}
+                      color={'#000'}
                     />
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -208,7 +209,7 @@ const Home = ({navigation}) => {
                     <FontAwesomeIcon
                       icon={faBell}
                       size={scaleFontsSize(26)}
-                      color={'#022150'}
+                      color={'#000'}
                     />
                   </TouchableOpacity>
                 </View>

@@ -80,7 +80,7 @@ const style = StyleSheet.create({
     fontFamily: getFontFamily('Inter', '400'),
     fontSize: scaleFontsSize(17),
     color: '#000',
-    lineHeight: 24,
+    lineHeight: 22,
   },
   descriptionExpandText: {
     fontFamily: getFontFamily('Inter', '600'),
@@ -121,11 +121,21 @@ const style = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     borderRadius: horizontalScale(20),
   },
+  VolunteeringContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: horizontalScale(15),
+    marginVertical: verticalScale(12),
+  },
+  VolunteeringTxt: {
+    fontFamily: getFontFamily('Inter', '400'),
+    fontSize: scaleFontsSize(16.5),
+    paddingRight: horizontalScale(16),
+    color: '#000',
+  },
   MapContainer: {
-    marginTop: verticalScale(10),
     borderBottomWidth: scaleFontsSize(1),
     borderColor: '#ccc',
-    marginBottom: verticalScale(-75),
+    marginBottom: verticalScale(-80),
   },
   MapImageContainer: {
     paddingTop: verticalScale(15),

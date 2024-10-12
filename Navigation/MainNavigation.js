@@ -9,6 +9,7 @@ import {
   faHome,
   faPlus,
   faHandHoldingHeart,
+  faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import {scaleFontsSize, verticalScale} from '../assets/Styles/Scaling';
 import DonationPage from '../assets/screens/DonationPage/DonationPage';
@@ -70,7 +71,8 @@ export const ExplorePageTabsNavigator = () => {
         },
 
         tabBarIndicatorStyle: {
-          backgroundColor: '#022150', // Indicator color for the focused tab
+          backgroundColor: '#0753F7',
+          color: '#0753F7',
         },
       }}>
       <ExploreTabs.Screen name="Posts" component={Post} />
@@ -177,6 +179,7 @@ const MainTabsNavigator = () => {
         }}
         component={ProfiletackNavigator}
       />
+
       <BottomTabs.Screen
         name={Routes.Spotlight}
         options={{

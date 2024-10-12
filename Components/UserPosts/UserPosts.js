@@ -28,6 +28,12 @@ const UserPosts = props => {
   const toggleLikedButton = () => {
     setPostLiked(!PostLiked);
   };
+  const handleDonatePress = () => {
+    navigation.navigate('DonationPage', {
+      donationType: 'Charity',
+      Char_Event_name: `${props.firstName} ${props.LastName}`,
+    });
+  };
   const BookmarkedButton = () => {
     setPostBookmarked(!PostBookmarked);
   };
@@ -63,10 +69,7 @@ const UserPosts = props => {
       <View style={[style.postInfo, {alignItems: 'flex-start'}]}>
         <View style={{flexDirection: 'row'}}>
           <View style={style.icons}>
-            <Pressable
-              onPress={() => {
-                navigation.navigate('DonationPage');
-              }}>
+            <Pressable onPress={handleDonatePress}>
               <FontAwesomeIcon
                 icon={faDonate}
                 size={scaleFontsSize(24)}

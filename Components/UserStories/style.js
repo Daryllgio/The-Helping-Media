@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   UserName: {
     fontSize: scaleFontsSize(13),
-    color: '#022150',
+    color: '#000',
     fontFamily: getFontFamily('Inter', '500'),
     textAlign: 'center',
     letterSpacing: 0.14,

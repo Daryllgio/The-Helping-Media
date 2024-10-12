@@ -7,8 +7,8 @@ import {
   ScrollView,
   FlatList,
   Pressable,
-  Dimensions,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -16,6 +16,8 @@ import {
   faLocationDot,
   faArrowUpFromBracket,
   faChevronLeft,
+  faCheck,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import * as Progress from 'react-native-progress';
 import style from './style';
@@ -27,17 +29,38 @@ import {
 import {faBell} from '@fortawesome/free-regular-svg-icons';
 import {faBell as faBellSolid} from '@fortawesome/free-solid-svg-icons';
 
-const {width, height} = Dimensions.get('window');
-
 const EventDescription = ({route, navigation}) => {
   const {eventData} = route.params;
   const [isNotificationOn, setIsNotificationOn] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [Volunteering, setVolunteering] = useState(false);
 
   const toggleNotification = () => {
     setIsNotificationOn(!isNotificationOn);
   };
+  const toggleVolunteering = () => {
+    setVolunteering(!Volunteering);
+    if (!Volunteering) {
+      // Show alert when registering for volunteering
+      Alert.alert(
+        'Volunteering',
+        'You have successfully registered for volunteering!',
+      );
+    } else {
+      // Show alert when canceling volunteering
+      Alert.alert(
+        'Volunteering',
+        'You have canceled your volunteering registration.',
+      );
+    }
+  };
 
+  const handleDonatePress = () => {
+    navigation.navigate('DonationPage', {
+      donationType: 'Event',
+      Char_Event_name: eventData.EventName,
+    });
+  };
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
   };
@@ -110,6 +133,18 @@ const EventDescription = ({route, navigation}) => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={style.carouselContainer}
         />
+        <View style={style.VolunteeringContainer}>
+          <Text style={style.VolunteeringTxt}>
+            Are you interested volunteering ?{' '}
+          </Text>
+          <Pressable onPress={toggleVolunteering}>
+            <FontAwesomeIcon
+              icon={Volunteering ? faXmark : faCheck}
+              color={Volunteering ? 'red' : '#0753F7'}
+              size={24}
+            />
+          </Pressable>
+        </View>
         <View style={style.MapContainer}>
           <View style={style.MapImageContainer}>
             <Image
@@ -125,7 +160,7 @@ const EventDescription = ({route, navigation}) => {
       </ScrollView>
       <View style={style.ActionButtonContainer}>
         <View style={style.ActionButton}>
-          <Pressable style={style.donateButton}>
+          <Pressable onPress={handleDonatePress} style={style.donateButton}>
             <Text style={style.donateButtonText}>Donate Now</Text>
           </Pressable>
           <Pressable onPress={toggleNotification}>

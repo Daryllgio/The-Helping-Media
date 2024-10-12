@@ -14,9 +14,9 @@ const style = StyleSheet.create({
     marginHorizontal: horizontalScale(5),
     marginVertical: verticalScale(8),
   },
-  DonateTxt: {
+  HeaderTxt: {
     fontFamily: getFontFamily('Inter', '600'),
-    color: '#022150',
+    color: '#000',
     fontSize: scaleFontsSize(27),
   },
   IconContainer: {
