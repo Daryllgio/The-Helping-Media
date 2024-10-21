@@ -7,20 +7,23 @@ import {
 import {getFontFamily} from '../../assets/fonts/helper';
 
 const style = StyleSheet.create({
-  ButtonStyle: {
-    backgroundColor: '#4962F7',
-
-    borderRadius: horizontalScale(20),
-    alignItems: 'center',
-    justifyContent: 'center',
+  button: {
+    backgroundColor: '#0753F7',
+    borderRadius: horizontalScale(10),
+    padding: horizontalScale(15),
+    borderCurve: 'continuous',
   },
-  ButtonTxtStyle: {
-    fontSize: scaleFontsSize(20),
-    color: 'white',
-    fontFamily: getFontFamily('inter', '700'),
+  Shadowstyle: {
+    shadowColor: '#000',
+    shadowOffset: {width: horizontalScale(0), height: verticalScale(3)},
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
   },
-  disable: {
-    opacity: 0.5,
+  text: {
+    fontSize: scaleFontsSize(17),
+    fontFamily: getFontFamily('Inter', '700'),
+    color: '#ffffff',
   },
 });
 

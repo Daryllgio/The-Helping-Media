@@ -36,6 +36,11 @@ import {getFontFamily} from '../assets/fonts/helper';
 import ProfileTestimoniesSection from '../assets/screens/Profile/ProfileTestimoniesSection';
 import ChatDetail from '../assets/screens/Chats/ChatDetail';
 import EventDescription from '../assets/screens/EventDescription/EventDescription';
+import Welcome from '../assets/screens/Welcome/Welcome';
+import LogIn from '../assets/screens/Login/LogIn';
+import UserTypeSelection from '../assets/screens/SignUp/SignUpSelection/UserTypeSelection';
+import CharitySignUp from '../assets/screens/SignUp/CharitySignUp/CharitySignUp';
+import DonorSignUp from '../assets/screens/SignUp/DonorSignUp/DonorSignUp';
 
 const Stack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -203,6 +208,14 @@ const MainNavigation = () => {
   return (
     <RootStack.Navigator screenOptions={{headerShown: false}}>
       <RootStack.Screen name="MainTabs" component={MainTabsNavigator} />
+      <RootStack.Screen name="Welcome" component={Welcome} />
+      <RootStack.Screen name="LogIn" component={LogIn} />
+      <RootStack.Screen
+        name="UserTypeSelection"
+        component={UserTypeSelection}
+      />
+      <RootStack.Screen name="CharitySignUp" component={CharitySignUp} />
+      <RootStack.Screen name="DonorSignUp" component={DonorSignUp} />
       <RootStack.Screen name="ChatDetail" component={ChatDetail} />
       <RootStack.Screen name="DonationPage" component={DonationPage} />
       <RootStack.Screen name="SelectionScreen" component={SelectionScreen} />

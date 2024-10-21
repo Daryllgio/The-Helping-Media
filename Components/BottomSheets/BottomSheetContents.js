@@ -43,33 +43,3 @@ export const Comments = ({onPress}) => (
     </TouchableOpacity>
   </View>
 );
-
-export const CreateButtomSheet = ({onPress}) => (
-  <View>
-    <Text style={style.optionHearder}>Create</Text>
-    <TouchableOpacity style={style.option} onPress={() => onPress('About')}>
-      <FontAwesomeIcon icon={faInfoCircle} size={24} color="#007bff" />
-      <Text style={style.optionText}>Post</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={style.option} onPress={() => onPress('Help')}>
-      <FontAwesomeIcon icon={faHeart} size={24} color="#007bff" />
-      <Text style={style.optionText}>Event</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={style.option} onPress={() => onPress('About')}>
-      <FontAwesomeIcon icon={faInfoCircle} size={24} color="#007bff" />
-      <Text style={style.optionText}>News</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={style.option} onPress={() => onPress('About')}>
-      <FontAwesomeIcon icon={faInfoCircle} size={24} color="#007bff" />
-      <Text style={style.optionText}>Fundraiser</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={style.option} onPress={() => onPress('About')}>
-      <FontAwesomeIcon icon={faInfoCircle} size={24} color="#007bff" />
-      <Text style={style.optionText}>Story</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={style.option} onPress={() => onPress('About')}>
-      <FontAwesomeIcon icon={faInfoCircle} size={24} color="#007bff" />
-      <Text style={style.optionText}>Live</Text>
-    </TouchableOpacity>
-  </View>
-);

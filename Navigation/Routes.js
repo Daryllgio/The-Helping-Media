@@ -16,4 +16,10 @@ export const Routes = {
   Create: 'Create',
   Post: 'Post',
   EventDescription: 'EventDescription',
+  Welcome: 'Welcome',
+  LogIn: 'LogIn',
+  SignUp: 'SignUp',
+  UserTypeSelection: 'UserTypeSelection',
+  CharitySignUp: 'CharitySignUp',
+  DonorSignUp: 'CharitySignUp',
 };

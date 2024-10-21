@@ -21,7 +21,6 @@ const style = StyleSheet.create({
   },
   TextContainer: {
     width: horizontalScale(270),
-
     height: verticalScale(50),
     flexDirection: 'column',
     justifyContent: 'center',

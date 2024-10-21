@@ -26,7 +26,7 @@ const MessageBar = props => {
         <View style={style.profileImage}>
           <UserProfileImage
             profileImage={props.profileImage}
-            ImageDimensions={43} // Code to set the image dimensions for the user stories
+            ImageDimensions={43}
           />
         </View>
         <View style={style.TextContainer}>

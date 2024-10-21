@@ -1,35 +1,30 @@
 import React from 'react';
-import {Pressable, Text} from 'react-native';
-import PropTypes from 'prop-types';
+import {Pressable, View, Text} from 'react-native';
 import style from './style';
+import Loading from '../Loading/Loading';
 
-const Buttons = props => {
+const Buttons = ({
+  buttonstyle,
+  titlestyle,
+  title = '',
+  onPress,
+  loading = false,
+  hasShadow = true,
+}) => {
+  if (loading) {
+    return (
+      <View style={[style.button, buttonstyle, {backgroundColor: 'white'}]}>
+        <Loading />
+      </View>
+    );
+  }
+
   return (
-    //The disabled is used to enable or disable the button depending on the
     <Pressable
-      disabled={props.isDisabled}
-      onPress={props.onPress}
-      style={[
-        style.ButtonStyle,
-        props.isDisabled && style.disable,
-        {width: props.ButtonWidth, height: props.ButtonHeight},
-      ]}>
-      <Text style={style.ButtonTxtStyle}>{props.ButtonTxt}</Text>
+      onPress={onPress}
+      style={[style.button, buttonstyle, hasShadow && style.Shadowstyle]}>
+      <Text style={[style.text, titlestyle]}>{title}</Text>
     </Pressable>
   );
-};
-
-Buttons.defaultProps = {
-  // Default state of the button is set to disabled here
-  isDisabled: true,
-  onPress: () => {},
-};
-
-Buttons.PropTypes = {
-  ButtonTxt: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool, // To confirm if the button is disabled or enabled
-  onPress: PropTypes.func,
-  ButtonWidth: PropTypes.number.isRequired,
-  ButtonHeight: PropTypes.number.isRequired,
 };
 export default Buttons;

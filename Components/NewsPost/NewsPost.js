@@ -8,6 +8,8 @@ import {
   faHeart,
   faShareSquare,
 } from '@fortawesome/free-regular-svg-icons';
+import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
+import {faBookmark as faBookmarkSolid} from '@fortawesome/free-solid-svg-icons';
 import {scaleFontsSize} from '../../assets/Styles/Scaling';
 import PropTypes from 'prop-types';
 import style from './style';
@@ -44,10 +46,45 @@ const NewsPost = props => {
       }}
     />
   );
+
+  const [PostLiked, setPostLiked] = useState(false);
+  const [PostBookmarked, setPostBookmarked] = useState(false);
+  const [likesDelta, setLikesDelta] = useState(0);
+  const [bookmarksDelta, setBookmarksDelta] = useState(0);
+
+  const formatStat = value => {
+    value = parseInt(value);
+    if (value >= 1000000) {
+      return (value / 1000000).toFixed(1).replace('.0', '') + 'M';
+    } else if (value >= 1000) {
+      return (value / 1000).toFixed(1).replace('.0', '') + 'K';
+    }
+    return value.toString();
+  };
+  const toggleLikedButton = () => {
+    setPostLiked(prevLiked => {
+      const newLikedState = !prevLiked;
+      setLikesDelta(prevDelta =>
+        newLikedState ? prevDelta + 1 : prevDelta - 1,
+      );
+      return newLikedState;
+    });
+  };
+
   const handleDonatePress = () => {
     navigation.navigate('DonationPage', {
       donationType: 'Charity',
       Char_Event_name: props.AccountName,
+    });
+  };
+
+  const BookmarkedButton = () => {
+    setPostBookmarked(prevBookmarked => {
+      const newBookmarkedState = !prevBookmarked;
+      setBookmarksDelta(prevDelta =>
+        newBookmarkedState ? prevDelta + 1 : prevDelta - 1,
+      );
+      return newBookmarkedState;
     });
   };
 
@@ -88,49 +125,52 @@ const NewsPost = props => {
             <Pressable onPress={handleDonatePress}>
               <FontAwesomeIcon
                 icon={faDonate}
-                size={scaleFontsSize(22)}
+                size={scaleFontsSize(24)}
                 color={'#000'}
                 style={style.iconSpace}
               />
             </Pressable>
-            <Text style={style.numbers}>{props.Donations}k</Text>
+            <Text style={style.numbers}>{formatStat(props.Donations)}</Text>
           </View>
 
           <View style={style.icons}>
-            <Pressable>
+            <Pressable onPress={toggleLikedButton}>
               <FontAwesomeIcon
-                icon={faHeart}
-                size={scaleFontsSize(20)}
-                color={'#000'}
+                icon={PostLiked ? faHeartSolid : faHeart}
+                size={scaleFontsSize(22)}
+                color={PostLiked ? 'red' : '#000'}
                 style={style.iconSpace}
               />
             </Pressable>
-            <Text style={style.numbers}>{props.likes}k</Text>
+            <Text style={style.numbers}>
+              {formatStat(parseInt(props.likes) + likesDelta)}
+            </Text>
           </View>
 
           <View style={style.icons}>
             <Pressable>
               <FontAwesomeIcon
                 icon={faComment}
-                size={scaleFontsSize(20)}
+                size={scaleFontsSize(22)}
                 color={'#000'}
                 style={style.iconSpace}
               />
             </Pressable>
-
-            <Text style={style.numbers}>{props.comments}k</Text>
+            <Text style={style.numbers}>{formatStat(props.comments)}</Text>
           </View>
 
           <View style={style.icons}>
-            <Pressable>
+            <Pressable onPress={BookmarkedButton}>
               <FontAwesomeIcon
-                icon={faBookmark}
-                size={scaleFontsSize(20)}
-                color={'#000'}
+                icon={PostBookmarked ? faBookmarkSolid : faBookmark}
+                size={scaleFontsSize(22)}
+                color={PostBookmarked ? '#0753F7' : '#000'}
                 style={style.iconSpace}
               />
             </Pressable>
-            <Text style={style.numbers}>{props.bookmarks}k</Text>
+            <Text style={style.numbers}>
+              {formatStat(parseInt(props.bookmarks) + bookmarksDelta)}
+            </Text>
           </View>
           <FontAwesomeIcon
             icon={faShareSquare}
